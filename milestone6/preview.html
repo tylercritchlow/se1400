@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>T-Shirt Preview</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="create-1.html">Create</a></li>
+            </ul>
+        </nav>
+
+        <div class="create-content-2">
+            <h1>T-Shirt Preview</h1>
+
+            <div class="review-container">
+                <div class="shirt-preview">
+                    <h3>Front</h3>
+                    <svg class="shirt" width="400" height="400" viewBox="0 0 174 174" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path id="frontPath"
+                            d="M32.625 10.875H65.25L87 32.625L108.75 10.875H141.375H174V54.375L141.375 65.25V174H32.625V65.25L0 54.375V10.875H32.625Z"
+                            fill="black" stroke="black" stroke-width="3" />
+                        <g id="frontImage"></g>
+                    </svg>
+                </div>
+
+                <div class="shirt-preview">
+                    <h3>Back</h3>
+                    <svg class="shirt" width="400" height="400" viewBox="0 0 174 174" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path id="backPath"
+                            d="M32.625 10.875H65.25H87H108.75H141.375H174V54.375L141.375 65.25V174H32.625V65.25L0 54.375V10.875H32.625Z"
+                            fill="black" stroke="black" stroke-width="3" />
+                        <g id="backImage"></g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="back-next-btns">
+                <a href="index.html" class="btn">Back to Gallery</a>
+            </div>
+        </div>
+    </div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const designId = urlParams.get('id');
+
+    if (designId !== null) {
+        const designs = JSON.parse(localStorage.getItem('tshirtDesigns') || '[]');
+        const design = designs[designId];
+
+        if (design) {
+            document.getElementById('frontPath').setAttribute('fill', design.color || 'black');
+            document.getElementById('backPath').setAttribute('fill', design.color || 'black');
+
+            if (design.frontImage) {
+                const frontImg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                frontImg.setAttribute('href', design.frontImage);
+                frontImg.setAttribute('x', '60');
+                frontImg.setAttribute('y', '60');
+                frontImg.setAttribute('width', '54');
+                frontImg.setAttribute('height', '54');
+                frontImg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                document.getElementById('frontImage').appendChild(frontImg);
+            }
+
+            if (design.backImage) {
+                const backImg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                backImg.setAttribute('href', design.backImage);
+                backImg.setAttribute('x', '60');
+                backImg.setAttribute('y', '60');
+                backImg.setAttribute('width', '54');
+                backImg.setAttribute('height', '54');
+                backImg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                document.getElementById('backImage').appendChild(backImg);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,286 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.grid-container {
+    display: grid;
+    background-color: white;
+    grid-template-columns: minmax(0px, 1fr) repeat(6, minmax(0, 175px)) minmax(0px, 1fr);
+    grid-template-rows: auto 1fr auto auto;
+}
+
+nav {
+    grid-column: 2 / 8;
+    background-color: #d9d9d9;
+    display: inline;
+}
+
+.active {
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    list-style-type: none;
+    padding: 1rem 0 0 0;
+    margin: 0;
+}
+
+nav ul li a {
+    display: flex;
+    color: black;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.content-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
+    grid-column: 2 / 8;
+    background-color: #d9d9d9;
+}
+
+.name {
+    font-size: 2em;
+}
+
+.logo {
+    width: 225px;
+    max-width: 100%;
+    height: auto;
+}
+
+.content-2 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2 / 8;
+    background-color: #d9d9d9;
+}
+
+.create-content-2 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2 / 8;
+    background-color: #d9d9d9;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #e0e0e0;
+    border: 2px solid black;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.shirt-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.shirt {
+    width: 100%;
+    padding: 5%;
+}
+
+.tshirt-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: 1rem;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.grid-item img {
+    max-width: 80%;
+    height: auto;
+}
+
+.content-1,
+.content-2,
+nav {
+    background-color: #d9d9d9;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-family: sans-serif;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.active-step {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    font-size: 14px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+.line {
+    height: 3px;
+    background-color: black;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.color-selector {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+    max-width: 400px;
+}
+
+.color-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
+    border: 2px solid transparent;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    border: 2px solid #333;
+}
+
+.review-container {
+    display: flex;
+    gap: 40px;
+    margin: 30px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.shirt-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.shirt-preview h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .grid-container {
+        grid-template-columns: minmax(0px, 1fr) 768px minmax(0px, 1fr);
+    }
+
+    nav {
+        grid-column: 2 / 3;
+    }
+
+    .content-1 {
+        grid-column: 2 / 3;
+    }
+
+    .content-2 {
+        grid-column: 2 / 3;
+    }
+
+    .tshirt-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logo {
+        width: 180px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        grid-column: 1 / -1;
+    }
+
+    .content-1 {
+        grid-column: 1 / -1;
+    }
+
+    .content-2 {
+        grid-column: 1 / -1;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .tshirt-grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2em;
+    }
+
+    .logo {
+        width: 150px;
+    }
+
+    .name {
+        font-size: 1.5em;
+    }
+}
