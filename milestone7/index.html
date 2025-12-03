@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Milestone 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <nav>
+            <ul>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="create-1.html">Create</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-1">
+            <p class="name">T-SHIRT CREATOR</p>
+            <img class="logo" src="images/logo.svg" alt="t-shirt shop logo">
+        </div>
+
+        <div class="content-2">
+            <div class="tshirt-grid-container" id="tshirtGrid">
+            </div>
+        </div>
+    </div>
+<script>
+    function loadCreatedTshirts() {
+        const grid = document.getElementById('tshirtGrid');
+        grid.innerHTML = '';
+
+        const designs = JSON.parse(localStorage.getItem('tshirtDesigns') || '[]');
+
+        if (designs.length === 0) {
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No t-shirts created yet. <a href="create-1.html">Create your first t-shirt!</a></p>';
+            return;
+        }
+
+        designs.forEach((design, index) => {
+            const gridItem = document.createElement('div');
+            gridItem.className = 'grid-item';
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '160');
+            svg.setAttribute('height', '160');
+            svg.setAttribute('viewBox', '0 0 174 174');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M32.625 10.875H65.25L87 32.625L108.75 10.875H141.375H174V54.375L141.375 65.25V174H32.625V65.25L0 54.375V10.875H32.625Z');
+            path.setAttribute('fill', design.color || 'black');
+            path.setAttribute('stroke', 'black');
+            path.setAttribute('stroke-width', '3');
+            svg.appendChild(path);
+
+            if (design.frontImage) {
+                const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                img.setAttribute('href', design.frontImage);
+                img.setAttribute('x', '50');
+                img.setAttribute('y', '50');
+                img.setAttribute('width', '74');
+                img.setAttribute('height', '74');
+                img.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                svg.appendChild(img);
+            }
+
+            gridItem.style.cursor = 'pointer';
+            gridItem.addEventListener('click', function() {
+                window.location.href = `preview.html?id=${index}`;
+            });
+            
+            gridItem.appendChild(svg);
+            grid.appendChild(gridItem);
+        });
+    }
+
+    function saveCurrentDesign() {
+        const frontImage = localStorage.getItem('frontImage');
+        const backImage = localStorage.getItem('backImage');
+        const color = localStorage.getItem('shirtColor');
+
+        if (frontImage || backImage || color) {
+            const designs = JSON.parse(localStorage.getItem('tshirtDesigns') || '[]');
+            designs.push({
+                frontImage: frontImage,
+                backImage: backImage,
+                color: color || 'black',
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('tshirtDesigns', JSON.stringify(designs));
+
+            localStorage.removeItem('frontImage');
+            localStorage.removeItem('backImage');
+            localStorage.removeItem('shirtColor');
+        }
+    }
+
+    if (document.referrer.includes('create-4.html')) {
+        saveCurrentDesign();
+    }
+
+    loadCreatedTshirts();
+</script>
+</body>
+
+</html>

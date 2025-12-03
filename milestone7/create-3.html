@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Milestone 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="create-1.html">Create</a></li>
+            </ul>
+        </nav>
+
+        <div class="create-content-2">
+            <h1>Choose Shirt Color</h1>
+            <div class="color-selector">
+                <div class="color-option" data-color="black" style="background-color: black;"></div>
+                <div class="color-option" data-color="white" style="background-color: white; border: 2px solid #ccc;">
+                </div>
+                <div class="color-option" data-color="red" style="background-color: red;"></div>
+                <div class="color-option" data-color="blue" style="background-color: blue;"></div>
+                <div class="color-option" data-color="green" style="background-color: green;"></div>
+                <div class="color-option" data-color="yellow" style="background-color: yellow;"></div>
+                <div class="color-option" data-color="purple" style="background-color: purple;"></div>
+                <div class="color-option" data-color="orange" style="background-color: orange;"></div>
+                <div class="color-option" data-color="pink" style="background-color: pink;"></div>
+                <div class="color-option" data-color="gray" style="background-color: gray;"></div>
+            </div>
+            <div class="progress-container">
+                <div class="step dot"></div>
+                <div class="line"></div>
+                <div class="step dot"></div>
+                <div class="line"></div>
+                <div class="step active-step">3</div>
+                <div class="line"></div>
+                <div class="step dot"></div>
+            </div>
+            <div class="back-next-btns">
+                <a href="create-2.html" class="btn">Back</a>
+                <a href="create-4.html" class="btn">Next</a>
+            </div>
+        </div>
+    </div>
+<script>
+    document.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', function () {
+            const color = this.getAttribute('data-color');
+            localStorage.setItem('shirtColor', color);
+
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.style.border = '2px solid transparent';
+            });
+            this.style.border = '3px solid #333';
+        });
+    });
+</script>
+</body>
+
+</html>

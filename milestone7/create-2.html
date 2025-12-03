@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Milestone 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="create-1.html">Create</a></li>
+            </ul>
+        </nav>
+
+        <div class="create-content-2">
+            <h1>Back Customization</h1>
+            <div class="shirt-container">
+                <svg class="shirt" width="400" height="400" viewBox="0 0 174 174" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M32.625 10.875H65.25H87H108.75H141.375H174V54.375L141.375 65.25V174H32.625V65.25L0 54.375V10.875H32.625Z"
+                        fill="black" stroke="black" stroke-width="2" />
+                </svg>
+            </div>
+
+            <input type="file" id="fileInput" style="display: none;" accept="image/*">
+            <button id="openFileDialog" class="btn">Upload Image</button>
+            <div class="progress-container">
+                <div class="step dot"></div>
+                <div class="line"></div>
+                <div class="step active-step">2</div>
+                <div class="line"></div>
+                <div class="step dot"></div>
+                <div class="line"></div>
+                <div class="step dot"></div>
+            </div>
+            <div class="back-next-btns">
+                <a href="create-1.html" class="btn">Back</a>
+                <a href="create-3.html" class="btn">Next</a>
+            </div>
+        </div>
+    </div>
+<script>
+    document.getElementById('openFileDialog').addEventListener('click', function () {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                img.setAttribute('href', e.target.result);
+                img.setAttribute('x', '60');
+                img.setAttribute('y', '60');
+                img.setAttribute('width', '54');
+                img.setAttribute('height', '54');
+                img.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                const svg = document.querySelector('.shirt');
+                svg.appendChild(img);
+
+                localStorage.setItem('backImage', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</body>
+
+</html>
